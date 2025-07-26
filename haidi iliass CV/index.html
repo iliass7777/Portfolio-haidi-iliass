@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -14,65 +14,169 @@
     <link rel="shortcut icon" href="assets/favicons/favicon.ico">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="msapplication-config" content="assets/favicons/browserconfig.xml">
-    <meta name="theme-color" content="#a789d4">
+    <meta name="theme-color" content="#6366f1">
+
+    <!--=============== GOOGLE FONTS ===============-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!--=============== BOXICONS ===============-->
-    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
-
-    <!--=============== SWIPER CSS ===============-->
-    <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <!--=============== CSS ===============-->
     <link rel="stylesheet" href="assets/css/styles.css">
 
-    <title> HAIDI ILIASS </title>
+    <!--=============== GSAP ===============-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
+
+    <!--=============== EMAILJS ===============-->
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
+    <title>HAIDI ILIASS - Développeur Full-Stack</title>
 
 </head>
 
-<body>
+<body class="loading">
+    <!--=============== LOADING SCREEN ===============-->
+    <div class="loading-screen" id="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <span class="loading-text">HAIDI ILIASS</span>
+                <div class="loading-subtitle">Développeur Full-Stack</div>
+            </div>
+            <div class="loading-progress">
+                <div class="loading-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!--=============== CURSOR ===============-->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursor-follower"></div>
+
+    <!--=============== AI CHATBOT ===============-->
+    <div class="chatbot-wrapper" style="position: fixed; bottom: 2rem; right: 2rem; z-index: 10000;">
+        <button class="chatbot-btn" id="chatbot-btn" type="button" onclick="toggleChatbot()">
+            <i class='bx bx-message-dots'></i>
+            <span class="chatbot-badge">IA</span>
+        </button>
+        <div class="chatbot-notification" id="chatbot-notification">
+            Posez-moi une question !
+        </div>
+    </div>
+
+    <div class="chatbot" id="chatbot">
+        <div class="chatbot__container" id="chatbot-container">
+
+        <div class="chatbot__container" id="chatbot-container">
+            <div class="chatbot__header">
+                <div class="chatbot__avatar">
+                    <i class='bx bx-bot'></i>
+                </div>
+                <div class="chatbot__info">
+                    <h3 class="chatbot__name">Assistant IA</h3>
+                    <span class="chatbot__status">En ligne</span>
+                </div>
+                <div class="chatbot__close" id="chatbot-close">
+                    <i class='bx bx-x'></i>
+                </div>
+            </div>
+
+            <div class="chatbot__messages" id="chatbot-messages">
+                <div class="message message--bot">
+                    <div class="message__avatar">
+                        <i class='bx bx-bot'></i>
+                    </div>
+                    <div class="message__content">
+                        <p>Bonjour ! Je suis l'assistant virtuel de Haidi Iliass. Je peux répondre à vos questions sur son parcours, ses compétences, ses projets et ses coordonnées. Comment puis-je vous aider ?</p>
+                        <span class="message__time">Maintenant</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chatbot__suggestions" id="chatbot-suggestions">
+                <div class="suggestion" data-question="Quel est votre numéro de téléphone ?">
+                    📞 Numéro de téléphone
+                </div>
+                <div class="suggestion" data-question="Quelle est votre adresse email ?">
+                    📧 Email
+                </div>
+                <div class="suggestion" data-question="Quelles sont vos études ?">
+                    🎓 Études
+                </div>
+                <div class="suggestion" data-question="Quelles sont vos compétences ?">
+                    💻 Compétences
+                </div>
+            </div>
+
+            <div class="chatbot__input">
+                <input type="text" id="chatbot-input" placeholder="Tapez votre question..." class="chatbot__field">
+                <button type="button" id="chatbot-send" class="chatbot__send">
+                    <i class='bx bx-send'></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!--=============== HEADER ===============-->
     <header class="header" id="header">
         <nav class="nav container">
-            <a href="#" class="nav__logo">HAIDI ILIASS</a>
+            <a href="#" class="nav__logo">
+                <span class="logo-text">HAIDI</span>
+                <span class="logo-accent">ILIASS</span>
+            </a>
 
-            <div class="nav__menu">
+            <div class="nav__menu" id="nav-menu">
                 <ul class="nav__list">
-                    <li class="nav__item ">
-                        <a href="#home" class="nav__link">
-                            <i class='bx bx-home'></i>
+                    <li class="nav__item">
+                        <a href="#home" class="nav__link active-link">
+                            <i class='bx bx-home nav__icon'></i>
+                            <span class="nav__text">Accueil</span>
                         </a>
                     </li>
 
-                    <li class="nav__item ">
+                    <li class="nav__item">
                         <a href="#about" class="nav__link">
-                            <i class='bx bx-user'></i>
+                            <i class='bx bx-user nav__icon'></i>
+                            <span class="nav__text">À propos</span>
                         </a>
                     </li>
 
                     <li class="nav__item">
                         <a href="#skills" class="nav__link">
-                            <i class='bx bx-book'></i>
+                            <i class='bx bx-code-alt nav__icon'></i>
+                            <span class="nav__text">Compétences</span>
                         </a>
                     </li>
 
                     <li class="nav__item">
-                        <a href="#work" class="nav__link">
-                            <i class='bx bx-briefcase-alt-2'></i>
+                        <a href="#projects" class="nav__link">
+                            <i class='bx bx-briefcase-alt-2 nav__icon'></i>
+                            <span class="nav__text">Projets</span>
                         </a>
                     </li>
 
                     <li class="nav__item">
                         <a href="#contact" class="nav__link">
-                            <i class='bx bx-message-square-dots'></i>
+                            <i class='bx bx-message-square-dots nav__icon'></i>
+                            <span class="nav__text">Contact</span>
                         </a>
                     </li>
                 </ul>
+                <div class="nav__close" id="nav-close">
+                    <i class='bx bx-x'></i>
+                </div>
             </div>
 
-            <!--=============== theme change button ===============-->
-            <i class='bx bx-moon change-theme change-theme-button' id="theme-button"></i>
-
+            <div class="nav__actions">
+                <i class='bx bx-moon change-theme' id="theme-button"></i>
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class='bx bx-menu'></i>
+                </div>
+            </div>
         </nav>
     </header>
 
@@ -80,584 +184,588 @@
     <main class="main">
         <!--=============== HOME ===============-->
         <section class="home section" id="home">
-            <div class="home__container container grid">
-                <div class="home__data">
-                    <span class="home__greeting">BONJOUR</span>
-                    <h1 class="home__name">HAIDI ILIASS</h1>
-                    <h3 class="home__education">Développeur Full-Stack</h3>
+            <div class="home__container container">
+                <div class="home__content">
+                    <div class="home__data">
+                        <div class="home__greeting">
+                            <span class="greeting-text">Bonjour, je suis</span>
+                        </div>
+                        <h1 class="home__name">
+                            <span class="name-line">HAIDI</span>
+                            <span class="name-line">ILIASS</span>
+                        </h1>
+                        <div class="home__profession">
+                            <span class="profession-text">Développeur</span>
+                            <span class="profession-highlight">Full-Stack</span>
+                        </div>
+                        <p class="home__description">
+                            Passionné par la création d'expériences numériques innovantes et performantes. 
+                            Je transforme vos idées en solutions technologiques modernes.
+                        </p>
 
-                    <div class="home__button">
-                        <a download="" href="assets/pdf/HAIDI ILIASS CV NEW1.pdf" class="button button--ghost">
-                            Telecharger CV
-                        </a>
+                        <div class="home__buttons">
+                            <a href="#projects" class="btn btn--primary">
+                                <span>Voir mes projets</span>
+                                <i class='bx bx-right-arrow-alt'></i>
+                            </a>
+                            <a download="HAIDI_ILIASS_CV.pdf" href="assets/pdf/HAIDI ILIASS DEVFS.pdf" class="btn btn--outline">
+                                <i class='bx bx-download'></i>
+                                <span>Télécharger CV</span>
+                            </a>
+                        </div>
 
-                        <a href="#about" class="button">Concernant moi</a>
+                        <!-- Bouton CV flottant -->
+                        <div class="cv-download-float">
+                            <a download="HAIDI_ILIASS_CV.pdf" href="assets/pdf/HAIDI ILIASS DEVFS.pdf" class="cv-btn-float" title="Télécharger mon CV">
+                                <i class='bx bx-download'></i>
+                                <span class="cv-text">CV</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="home__visual">
+                        <div class="home__image">
+                            <div class="image-container">
+                                <img src="assets/img/haidi iliass.jpeg" alt="Haidi Iliass" class="home__img">
+                                <div class="image-overlay"></div>
+                            </div>
+                        </div>
+                        <div class="floating-elements">
+                            <div class="floating-element" data-speed="2">
+                                <i class='bx bxl-react'></i>
+                            </div>
+                            <div class="floating-element" data-speed="3">
+                                <i class='bx bxl-javascript'></i>
+                            </div>
+                            <div class="floating-element" data-speed="1.5">
+                                <i class='bx bxl-php'></i>
+                            </div>
+                            <div class="floating-element" data-speed="2.5">
+                                <i class='bx bxl-python'></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- <div class="home__handle">
-                    <img src="assets/img/aicha.jpg" alt="" class="home__img">
-                </div> -->
-
                 <div class="home__social">
-                    <a href="https://www.linkedin.com/in/haidi-iliass-37381833a" target="_blank" class="home__social-link">
-                        <i class='bx bxl-linkedin'></i>
-                    </a>
-                    <a href="https://github.com/iliass7777" target="_blank" class="home__social-link">
-                        <i class='bx bxl-github'></i>
-                    </a>
+                    <div class="social-label">Suivez-moi</div>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/haidi-iliass-37381833a" target="_blank" class="social-link">
+                            <i class='bx bxl-linkedin-square'></i>
+                            <span class="social-tooltip">LinkedIn</span>
+                        </a>
+                        <a href="https://github.com/iliass7777" target="_blank" class="social-link">
+                            <i class='bx bxl-github'></i>
+                            <span class="social-tooltip">GitHub</span>
+                        </a>
+                        <a href="https://instagram.com/iliass.hd" target="_blank" class="social-link">
+                            <i class='bx bxl-instagram'></i>
+                            <span class="social-tooltip">Instagram</span>
+                        </a>
+                    </div>
                 </div>
 
-                <a href="#about" class="home__scroll">
-                    <i class='bx bx-mouse home__scroll-icon'></i>
-                    <span class="home__scroll-name">Descendez</span>
-                </a>
+                <div class="scroll-indicator">
+                    <div class="scroll-text">Scroll</div>
+                    <div class="scroll-line"></div>
+                </div>
+            </div>
+
+            <!-- Background Elements -->
+            <div class="home__bg">
+                <div class="bg-grid"></div>
+                <div class="bg-gradient"></div>
             </div>
         </section>
 
         <!--=============== ABOUT ===============-->
         <section class="about section" id="about">
-            <span class="section__subtitle">My Intro</span>
-            <h2 class="section__title">À propos de moi</h2>
+            <div class="container">
+                <div class="section-header">
+                    <span class="section__subtitle">Découvrez mon parcours</span>
+                    <h2 class="section__title">À propos de moi</h2>
+                </div>
 
-            <div class="about__container container grid">
-                <img src="assets/img/haidi iliass.jpeg" alt="" class="about__img">
-
-                <div class="about__data">
-                    <div class="about__info">
-                        <!-- <div class="about__box">
-                            <i class='bx bx-award about__icon'></i>
-                            <h3 class="about__title">Experience</h3>
-                            <span class="about__subtitle">8 Years Working</span>
-                        </div> -->
-                        <div class="about__box">
-                            <i class='bx bx-briefcase-alt about__icon'></i>
-                            <h3 class="about__title">Completed</h3>
-                            <span class="about__subtitle">10+ Projects</span>
+                <div class="about__container">
+                    <div class="about__content">
+                        <div class="about__image">
+                            <div class="about__img-wrapper">
+                                <img src="assets/img/haidi iliass.jpeg" alt="Haidi Iliass" class="about__img">
+                                <div class="about__img-overlay"></div>
+                            </div>
                         </div>
-                        <div class="about__box">
-                            <i class='bx bx-support about__icon'></i>
-                            <h3 class="about__title">Support</h3>
-                            <span class="about__subtitle">Online 24/7</span>
+
+                        <div class="about__data">
+                            <div class="about__text">
+                                <h3 class="about__subtitle">Développeur Full-Stack Passionné</h3>
+                                <p class="about__description">
+                                    Étudiant en deuxième année à l'OFPPT NTIC-2, je me spécialise dans le développement Full-Stack 
+                                    avec une passion pour l'innovation et la résolution de problèmes complexes.
+                                </p>
+                                <p class="about__description">
+                                    Doté d'un esprit analytique et d'excellentes compétences en travail d'équipe, j'aime transformer 
+                                    des idées créatives en solutions technologiques robustes et évolutives. Mon approche combine 
+                                    expertise technique et vision stratégique pour créer des expériences numériques exceptionnelles.
+                                </p>
+                            </div>
+
+                            <div class="about__stats">
+                                <div class="stat-item">
+                                    <div class="stat-number" data-target="15">0</div>
+                                    <div class="stat-label">Projets Réalisés</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-number" data-target="2">0</div>
+                                    <div class="stat-label">Années d'Études</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-number" data-target="24">0</div>
+                                    <div class="stat-label">Support 24/7</div>
+                                </div>
+                            </div>
+
+                            <div class="about__actions">
+                                <a href="#contact" class="btn btn--primary">
+                                    <span>Contactez-moi</span>
+                                    <i class='bx bx-right-arrow-alt'></i>
+                                </a>
+                                <a href="#projects" class="btn btn--outline">
+                                    <span>Voir mes projets</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
-
-                    <p class="about__description">
-                        Étudiant en Développement Full-Stack avec une Passion pour la Résolution de Problèmes et l’Innovation
-
-                        Je suis Haidi Iliass, étudiant en deuxième année à l'OFPPT NTIC-2, spécialisé en développement Full-Stack. Doté d'un esprit analytique et d’un bon sens du travail en équipe, j’aime relever des défis et proposer des solutions informatiques efficaces et innovantes.
-                        
-                        Grâce à mes compétences en développement web et mobile, je suis capable de concevoir et déployer des applications robustes et évolutives. Mon intérêt pour les nouvelles technologies et le marketing me permet d’aborder les projets avec une vision technique et stratégique. Motivé par l’apprentissage continu, je m’engage à mettre mes connaissances au service de solutions informatiques adaptées et performantes.
-                    </p>
-
-                    <a href="#contact" class="button about__button-contact">Contact Me</a>
                 </div>
             </div>
         </section>
 
         <!--=============== SKILLS ===============-->
         <section class="skills section" id="skills">
-            <span class="section__subtitle">My Abilities</span>
-            <h2 class="section__title">My Experience</h2>
-
-            <div class="skills__container container grid">
-                <div class="skills__content">
-                    <h3 class="skills__title">Frontend Development</h3>
-
-                    <div class="skills__box">
-                        <div class="skills__group">
-                            <div class="skills__data">
-                                <i class='bx bxs-badge-check'></i>
-
-                                <div>
-                                    <h3 class="skills__name">HTML</h3>
-                                    <span class="skills__level">Advanced</span>
-                                </div>
-                            </div>
-
-                            <div class="skills__data">
-                                <i class='bx bxs-badge-check'></i>
-
-                                <div>
-                                    <h3 class="skills__name">CSS/BOOTSTRAP</h3>
-                                    <span class="skills__level">Advanced</span>
-                                </div>
-                            </div>
-
-                            <div class="skills__data">
-                                <i class='bx bxs-badge-check'></i>
-
-                                <div>
-                                    <h3 class="skills__name">Javascript</h3>
-                                    <span class="skills__level">Advanced</span>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="skills__group">
-                            <div class="skills__data">
-                                <i class='bx bxs-badge-check'></i>
-
-                                <div>
-                                    <h3 class="skills__name">React</h3>
-                                    <span class="skills__level">Advanced</span>
-                                </div>
-                            </div>
-
-                            <div class="skills__data">
-                                <i class='bx bxs-badge-check'></i>
-
-                                <div>
-                                    <h3 class="skills__name">Git</h3>
-                                    <span class="skills__level">Advanced</span>
-                                </div>
-                            </div>
-
-                            <div class="skills__data">
-                                <i class='bx bxs-badge-check'></i>
-
-                                <div>
-                                    <h3 class="skills__name">IONIC</h3>
-                                    <span class="skills__level">Intermediate</span>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
+            <div class="container">
+                <div class="section-header">
+                    <span class="section__subtitle">Mes compétences techniques</span>
+                    <h2 class="section__title">Technologies & Outils</h2>
                 </div>
 
-                <div class="skills__content">
-                    <h3 class="skills__title">Backend Development</h3>
+                <div class="skills__container">
+                    <div class="skills__content">
+                        <h3 class="skills__title">Frontend Development</h3>
+                        <div class="skills__box">
+                            <div class="skills__group">
+                                <div class="skills__data">
+                                    <i class='bx bxl-html5 skills__icon'></i>
+                                    <div>
+                                        <h3 class="skills__name">HTML5</h3>
+                                        <span class="skills__level">Avancé</span>
+                                    </div>
+                                    <div class="skills__progress">
+                                        <div class="skills__progress-bar" data-width="90"></div>
+                                    </div>
+                                </div>
 
-                    <div class="skills__box">
-                        <div class="skills__group">
-                            <div class="skills__data">
-                                <i class='bx bxs-badge-check'></i>
+                                <div class="skills__data">
+                                    <i class='bx bxl-css3 skills__icon'></i>
+                                    <div>
+                                        <h3 class="skills__name">CSS3/SASS</h3>
+                                        <span class="skills__level">Avancé</span>
+                                    </div>
+                                    <div class="skills__progress">
+                                        <div class="skills__progress-bar" data-width="85"></div>
+                                    </div>
+                                </div>
 
-                                <div>
-                                    <h3 class="skills__name">Laravel </h3>
-                                    <span class="skills__level">Advanced</span>
+                                <div class="skills__data">
+                                    <i class='bx bxl-javascript skills__icon'></i>
+                                    <div>
+                                        <h3 class="skills__name">JavaScript</h3>
+                                        <span class="skills__level">Avancé</span>
+                                    </div>
+                                    <div class="skills__progress">
+                                        <div class="skills__progress-bar" data-width="88"></div>
+                                    </div>
+                                </div>
+
+                                <div class="skills__data">
+                                    <i class='bx bxl-react skills__icon'></i>
+                                    <div>
+                                        <h3 class="skills__name">React</h3>
+                                        <span class="skills__level">Avancé</span>
+                                    </div>
+                                    <div class="skills__progress">
+                                        <div class="skills__progress-bar" data-width="82"></div>
+                                    </div>
                                 </div>
                             </div>
-
-                            <div class="skills__data">
-                                <i class='bx bxs-badge-check'></i>
-
-                                <div>
-                                    <h3 class="skills__name">Python</h3>
-                                    <span class="skills__level">Intermediate</span>
-                                </div>
-                            </div>
-
-                            <div class="skills__data">
-                                <i class='bx bxs-badge-check'></i>
-
-                                <div>
-                                    <h3 class="skills__name">MySQL</h3>
-                                    <span class="skills__level">Advanced</span>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="skills__group">
-                            <div class="skills__data">
-                                <i class='bx bxs-badge-check'></i>
-
-                                <div>
-                                    <h3 class="skills__name">Java</h3>
-                                    <span class="skills__level">Intermediate</span>
-                                </div>
-                            </div>
-
-                            <div class="skills__data">
-                                <i class='bx bxs-badge-check'></i>
-
-                                <div>
-                                    <h3 class="skills__name">PHP</h3>
-                                    <span class="skills__level">Advanced</span>
-                                </div>
-                            </div>
-
-                            <div class="skills__data">
-                                <i class='bx bxs-badge-check'></i>
-
-                                <div>
-                                    <h3 class="skills__name">MongoDB</h3>
-                                    <span class="skills__level">Advanced</span>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
-                </div>
-        </section>
 
-        <!--=============== SERVICES ===============-->
-        <section class="services section">
-            <span class="section__subtitle">My Services</span>
-            <h2 class="section__title">What I Offer</h2>
+                    <div class="skills__content">
+                        <h3 class="skills__title">Backend Development</h3>
+                        <div class="skills__box">
+                            <div class="skills__group">
+                                <div class="skills__data">
+                                    <i class='bx bxl-php skills__icon'></i>
+                                    <div>
+                                        <h3 class="skills__name">PHP/Laravel</h3>
+                                        <span class="skills__level">Avancé</span>
+                                    </div>
+                                    <div class="skills__progress">
+                                        <div class="skills__progress-bar" data-width="85"></div>
+                                    </div>
+                                </div>
 
-            <div class="services__container container grid">
-                <div class="services__card">
-                    <div class="serv">
-                        <h3 class="services__title"> Web and Mobile   <br> App Development</h3>
+                                <div class="skills__data">
+                                    <i class='bx bxl-python skills__icon'></i>
+                                    <div>
+                                        <h3 class="skills__name">Python</h3>
+                                        <span class="skills__level">Intermédiaire</span>
+                                    </div>
+                                    <div class="skills__progress">
+                                        <div class="skills__progress-bar" data-width="75"></div>
+                                    </div>
+                                </div>
 
-                        <span class="services__button">
-                            See More <i class='bx bx-right-arrow services__icon'></i>
-                        </span>
-                    </div>
+                                <div class="skills__data">
+                                    <i class='bx bx-data skills__icon'></i>
+                                    <div>
+                                        <h3 class="skills__name">MySQL</h3>
+                                        <span class="skills__level">Avancé</span>
+                                    </div>
+                                    <div class="skills__progress">
+                                        <div class="skills__progress-bar" data-width="80"></div>
+                                    </div>
+                                </div>
 
-
-                    <div class="services__modal">
-                        <div class="services__modal-content">
-                            <i class='bx bx-x services__modal-close'></i>
-
-                            <h3 class="services__modal-title">  Web and Mobile App Development</h3>
-
-                            <p class="services__modal-description">
-                                Bring your vision to life with custom solutions.
-                            </p>
-                            
-
-
-
-                            <ul class="services__modal-list">
-                                <li class="services__modal-item">
-                                    <i class='bx bx-check-circle'></i>
-                                    <p class="services__modal-info">
-                                        Tailored Solutions: Custom-built websites and apps to meet your specific needs.
-                                    </p>
-                                </li>
-
-                                <li class="services__modal-item">
-                                    <i class='bx bx-check-circle'></i>
-                                    <p class="services__modal-info">
-                                        Cross-Platform: Seamless experiences on both web and mobile devices.
-                                    </p>
-                                </li>
-
-                                <li class="services__modal-item">
-                                    <i class='bx bx-check-circle'></i>
-                                    <p class="services__modal-info">
-                                        Innovative Design: Cutting-edge design and technology integration.
-                                    </p>
-                                </li>
-
-                                
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="services__card">
-                    <h3 class="services__title">Full Deployment <br> Services</h3>
-
-                    <span class="services__button">
-                        See More <i class='bx bx-right-arrow services__icon'></i>
-                    </span>
-
-                    <div class="services__modal">
-                        <div class="services__modal-content">
-                            <i class='bx bx-x services__modal-close'></i>
-
-                            <h3 class="services__modal-title">Full Deployment Services</h3>
-
-                            <p class="services__modal-description">
-                                We support you at every stage, from design to launch.
-
-                       
-                                
-                             
-                            </p>
-
-                            <ul class="services__modal-list">
-                                <li class="services__modal-item">
-                                    <i class='bx bx-check-circle'></i>
-                                    <p class="services__modal-info">
-                                        End-to-End Service: Comprehensive support throughout the development lifecycle.
-                                    </p>
-                                </li>
-
-                                <li class="services__modal-item">
-                                    <i class='bx bx-check-circle'></i>
-                                    <p class="services__modal-info">
-                                        Launch Assistance: Smooth and successful deployment of your website or application.
-                                    </p>
-                                </li>
-
-                                <li class="services__modal-item">
-                                    <i class='bx bx-check-circle'></i>
-                                    <p class="services__modal-info">
-                                        Ongoing Support: Continuous support and maintenance post-launch.
-                                    </p>
-                                </li>
-
-                                
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="services__card">
-                    <h3 class="services__title">E-commerce Store Creation <br>and Management</h3>
-
-                    <span class="services__button">
-                        See More <i class='bx bx-right-arrow services__icon'></i>
-                    </span>
-
-                    <div class="services__modal">
-                        <div class="services__modal-content">
-                            <i class='bx bx-x services__modal-close'></i>
-
-                            <h3 class="services__modal-title">  E-commerce Store Creation and Management</h3>
-
-                            <p class="services__modal-description">
-                               From product management to payment integration and inventory control, we handle it all.
-
-                               
-                                
-                               
-                            </p>
-
-                            <ul class="services__modal-list">
-                                <li class="services__modal-item">
-                                    <i class='bx bx-check-circle'></i>
-                                    <p class="services__modal-info">
-                                        Complete Setup: End-to-end solutions for building and managing your online store.
-                                    </p>
-                                </li>
-
-                                <li class="services__modal-item">
-                                    <i class='bx bx-check-circle'></i>
-                                    <p class="services__modal-info">
-                                        Payment Integration: Secure and efficient payment processing.
-                                    </p>
-                                </li>
-
-                                <li class="services__modal-item">
-                                    <i class='bx bx-check-circle'></i>
-                                    <p class="services__modal-info">
-                                        Inventory Management: Keep track of stock and manage product listings effortlessly.
-                                    </p>
-                                </li>
-
-                               
-                            </ul>
+                                <div class="skills__data">
+                                    <i class='bx bxl-git skills__icon'></i>
+                                    <div>
+                                        <h3 class="skills__name">Git/GitHub</h3>
+                                        <span class="skills__level">Avancé</span>
+                                    </div>
+                                    <div class="skills__progress">
+                                        <div class="skills__progress-bar" data-width="88"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!--=============== WORK ===============-->
-        <section class="work section" id="work">
-            <span class="section__subtitle">My Portfolio</span>
-            <h2 class="section__title">Recent Works</h2>
-
-            <div class="work__filters">
-                <span class="work__item active-work" data-filter='all'>All Project</span>
-                
-            </div>
-
-            <div class="work__container container grid">
-                <div class="work__card mix web">
-                    <img src="assets/img/Capture44.PNG" alt="" class="work__img">
-
-                    <h3 class="work__title">Listen APP</h3>
-
-                    <a href="" class="work__button">
-                        Demo <i class='bx bx-right-arrow work__icon'></i>
-                    </a>
+        <!--=============== PROJECTS ===============-->
+        <section class="projects section" id="projects">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section__subtitle">Mon portfolio</span>
+                    <h2 class="section__title">Projets Récents</h2>
                 </div>
 
-                <div class="work__card mix movil">
-                    <img src="assets/img/Capture3.PNG" alt="" class="work__img">
+                <div class="projects__grid">
+                    <!-- Card 1: E-Commerce Platform -->
+                    <div class="project-card" data-project="ecommerce">
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <div class="card-image">
+                                    <img src="assets/img/Capture44.PNG" alt="E-Commerce Platform">
+                                    <div class="card-overlay">
+                                        <div class="card-badge">E-Commerce</div>
+                                        <div class="card-icon">
+                                            <i class='bx bx-store'></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-title">
+                                    <h3>Plateforme E-Commerce</h3>
+                                    <p>Solution complète de vente en ligne</p>
+                                </div>
+                            </div>
+                            <div class="card-back">
+                                <div class="card-content">
+                                    <h3>E-Commerce Platform</h3>
+                                    <p>Plateforme e-commerce complète avec paiements sécurisés et gestion des stocks.</p>
+                                    <div class="card-tech">
+                                        <span class="tech-tag">Laravel</span>
+                                        <span class="tech-tag">Vue.js</span>
+                                        <span class="tech-tag">MySQL</span>
+                                    </div>
+                                    <div class="card-actions">
+                                        <a href="#" class="card-btn">
+                                            <i class='bx bx-link-external'></i>
+                                            Démo
+                                        </a>
+                                        <a href="https://github.com/iliass7777" class="card-btn">
+                                            <i class='bx bxl-github'></i>
+                                            Code
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                    <h3 class="work__title">MP3 Player</h3>
-                    <a href="" class="work__button">
-                        Demo <i class='bx bx-right-arrow work__icon'></i>
-                    </a>
+                    <!-- Card 2: Mobile App -->
+                    <div class="project-card" data-project="mobile">
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <div class="card-image">
+                                    <img src="assets/img/Capture3.PNG" alt="Mobile App">
+                                    <div class="card-overlay">
+                                        <div class="card-badge mobile">Mobile</div>
+                                        <div class="card-icon">
+                                            <i class='bx bx-mobile-alt'></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-title">
+                                    <h3>Application Mobile</h3>
+                                    <p>App native iOS/Android moderne</p>
+                                </div>
+                            </div>
+                            <div class="card-back">
+                                <div class="card-content">
+                                    <h3>FitTracker App</h3>
+                                    <p>Application mobile de fitness avec tracking GPS et programmes personnalisés.</p>
+                                    <div class="card-tech">
+                                        <span class="tech-tag">React Native</span>
+                                        <span class="tech-tag">Firebase</span>
+                                        <span class="tech-tag">Node.js</span>
+                                    </div>
+                                    <div class="progress-section">
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" data-progress="75"></div>
+                                        </div>
+                                        <span class="progress-text">75% complété</span>
+                                    </div>
+                                    <div class="card-actions">
+                                        <a href="#" class="card-btn">
+                                            <i class='bx bx-download'></i>
+                                            App
+                                        </a>
+                                        <a href="https://github.com/iliass7777" class="card-btn">
+                                            <i class='bx bxl-github'></i>
+                                            Code
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Analytics Dashboard -->
+                    <div class="project-card" data-project="analytics">
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <div class="card-image">
+                                    <img src="assets/img/spyzem1.png" alt="Analytics Dashboard">
+                                    <div class="card-overlay">
+                                        <div class="card-badge analytics">Analytics</div>
+                                        <div class="card-icon">
+                                            <i class='bx bx-line-chart'></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-title">
+                                    <h3>Dashboard Analytics</h3>
+                                    <p>Visualisation de données avancée</p>
+                                </div>
+                            </div>
+                            <div class="card-back">
+                                <div class="card-content">
+                                    <h3>DataViz Pro</h3>
+                                    <p>Dashboard analytics avec visualisations interactives et rapports automatisés.</p>
+                                    <div class="card-tech">
+                                        <span class="tech-tag">Python</span>
+                                        <span class="tech-tag">Django</span>
+                                        <span class="tech-tag">D3.js</span>
+                                    </div>
+                                    <div class="card-actions">
+                                        <a href="#" class="card-btn">
+                                            <i class='bx bx-line-chart'></i>
+                                            Démo
+                                        </a>
+                                        <a href="https://github.com/iliass7777" class="card-btn">
+                                            <i class='bx bxl-github'></i>
+                                            Code
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: API Platform -->
+                    <div class="project-card" data-project="api">
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <div class="card-image gradient-bg">
+                                    <div class="card-overlay">
+                                        <div class="card-badge api">API</div>
+                                        <div class="card-icon">
+                                            <i class='bx bx-code-alt'></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-title">
+                                    <h3>API Platform</h3>
+                                    <p>Microservices & REST API</p>
+                                </div>
+                            </div>
+                            <div class="card-back">
+                                <div class="card-content">
+                                    <h3>CloudAPI</h3>
+                                    <p>API REST avec authentification JWT et monitoring avancé.</p>
+                                    <div class="card-tech">
+                                        <span class="tech-tag">Node.js</span>
+                                        <span class="tech-tag">Express</span>
+                                        <span class="tech-tag">Docker</span>
+                                    </div>
+                                    <div class="card-actions">
+                                        <a href="#" class="card-btn">
+                                            <i class='bx bx-book-open'></i>
+                                            Docs
+                                        </a>
+                                        <a href="https://github.com/iliass7777" class="card-btn">
+                                            <i class='bx bxl-github'></i>
+                                            Code
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-
-                <div class="work__card mix web">
-                    <img src="assets/img/netty.jpg" alt="" class="work__img">
-
-                    <h3 class="work__title">application web</h3>
-
-                    <a href="https://github.com/iliass7777" class="work__button">
-                        Demo <i class='bx bx-right-arrow work__icon'></i>
-                    </a>
-                </div>
-                <div class="work__card mix web">
-                    <img src="assets/img/spyzem1.png" alt="" class="work__img">
-
-                    <h3 class="work__title">Spyzem App </h3>
-
-                    <a href="https://github.com/iliass7777" class="work__button">
-                        Demo <i class='bx bx-right-arrow work__icon'></i>
-                    </a>
-                </div>
-   
-               
-
             </div>
         </section>
 
         <!--=============== CONTACT ===============-->
         <section class="contact section" id="contact">
-            <sapn class="section__subtitle">Get in touch</sapn>
-            <h3 class="section__title">Contact Me</h3>
+            <div class="container">
+                <div class="section-header">
+                    <span class="section__subtitle">Restons en contact</span>
+                    <h2 class="section__title">Contactez-moi</h2>
+                </div>
 
-            <div class="contact__container container grid">
-                <div class="contact__content">
-                    <h3 class="contact__title contact__title-info">Talk to me</h3>
+                <div class="contact__container">
+                    <div class="contact__content">
+                        <div class="contact__info">
+                            <h3 class="contact__title">Parlons de votre projet</h3>
+                            <p class="contact__description">
+                                Je suis toujours ouvert aux nouvelles opportunités et collaborations.
+                                N'hésitez pas à me contacter pour discuter de vos projets.
+                            </p>
 
-                    <div class="contact__info">
-                        <div class="contact__card">
-                            <i class='bx bx-mail-send contact__card-icon'></i>
-                            <h3 class="contact__card-title">Email</h3>
-                            <span class="contact__card-data">haidi.iliass.pro@gmail.com</span>
-                           
+                            <div class="contact__cards">
+                                <div class="contact__card">
+                                    <i class='bx bx-mail-send contact__card-icon'></i>
+                                    <h3 class="contact__card-title">Email</h3>
+                                    <span class="contact__card-data">haidi.iliass.pro@gmail.com</span>
+                                    <a href="mailto:haidi.iliass.pro@gmail.com" class="contact__button">
+                                        Envoyer un email <i class='bx bx-right-arrow-alt'></i>
+                                    </a>
+                                </div>
 
-                            <a href="mailto:haidi.iliass.pro@gmail.com" target="_blank" class="contact__button">
-                                Write Me <i class='bx bx-right-arrow contact__button-icon'></i>
-                            </a>
+                                <div class="contact__card">
+                                    <i class='bx bxl-whatsapp contact__card-icon'></i>
+                                    <h3 class="contact__card-title">WhatsApp</h3>
+                                    <span class="contact__card-data">+212 709702820</span>
+                                    <a href="https://api.whatsapp.com/send?phone=+212709702820&text=Bonjour!" target="_blank" class="contact__button">
+                                        Écrire sur WhatsApp <i class='bx bx-right-arrow-alt'></i>
+                                    </a>
+                                </div>
+
+                                <div class="contact__card">
+                                    <i class='bx bxl-linkedin contact__card-icon'></i>
+                                    <h3 class="contact__card-title">LinkedIn</h3>
+                                    <span class="contact__card-data">Haidi Iliass</span>
+                                    <a href="https://www.linkedin.com/in/haidi-iliass-37381833a" target="_blank" class="contact__button">
+                                        Connecter sur LinkedIn <i class='bx bx-right-arrow-alt'></i>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="contact__card">
-                            <i class='bx bxl-whatsapp contact__card-icon'></i>
-                            <h3 class="contact__card-title">Whatsapp</h3>
-                            <span class="contact__card-data">+212 709702820</span>
-
-                            <a href="https://api.whatsapp.com/send?phone=+212709702820&text=Hey there!" target="_blank"
-                                class="contact__button">
-                                Write Me <i class='bx bx-right-arrow contact__button-icon'></i>
-                            </a>
-                        </div>
-                        
-
-                        <div class="contact__card">
-                            <i class='bx bxl-instagram footer__social-icon'></i>
-                            <h3 class="contact__card-title">instagram</h3>
-                            <span class="contact__card-data">iliass.hd</span>
-
-                            <a href="https://instagram.com/iliass.hd" target="_blank" class="contact__button">
-                                Write Me <i class='bx bx-right-arrow contact__button-icon'></i>
-                            </a>
+                        <div class="contact__form-container">
+                            <h3 class="contact__title">Envoyez-moi un message</h3>
+                            <form id="contact-form" class="contact__form">
+                                <div class="contact__form-group">
+                                    <div class="contact__form-div">
+                                        <label for="name" class="contact__form-tag">Nom complet</label>
+                                        <input type="text" id="name" name="name" placeholder="Votre nom" class="contact__form-input" required>
+                                    </div>
+                                    <div class="contact__form-div">
+                                        <label for="email" class="contact__form-tag">Email</label>
+                                        <input type="email" id="email" name="email" placeholder="votre@email.com" class="contact__form-input" required>
+                                    </div>
+                                </div>
+                                <div class="contact__form-div">
+                                    <label for="subject" class="contact__form-tag">Sujet</label>
+                                    <input type="text" id="subject" name="subject" placeholder="Sujet de votre message" class="contact__form-input" required>
+                                </div>
+                                <div class="contact__form-div contact__form-area">
+                                    <label for="message" class="contact__form-tag">Message</label>
+                                    <textarea id="message" name="message" cols="30" rows="8" placeholder="Écrivez votre message ici..." class="contact__form-input" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn--primary contact__form-button">
+                                    <span>Envoyer le message</span>
+                                    <i class='bx bx-send'></i>
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
-              
-                
-                <div class="contact__content">
-                    <h3 class="contact__title contact__title-form">Write Me your Message</h3>
-
-                    <form id="contact-form" class="contact__form">
-                        <div class="contact__form-div">
-                            <label for="name" class="contact__form-tag">Name</label>
-                            <input type="text" id="name" placeholder="Enter name" class="contact__form-input" required>
-                        </div>
-                    
-                        <div class="contact__form-div">
-                            <label for="email" class="contact__form-tag">Mail</label>
-                            <input type="email" id="email" placeholder="Enter email" class="contact__form-input" required>
-                        </div>
-                    
-                        <div class="contact__form-div contact__form-area">
-                            <label for="message" class="contact__form-tag">Message</label>
-                            <textarea id="message" cols="30" rows="10" placeholder="Write your Message" class="contact__form-input" required></textarea>
-                        </div>
-                    
-                        <button type="submit" class="button">Send Message</button>
-                    </form>
-
-                </div>
-
+            </div>
         </section>
     </main>
 
     <!--=============== FOOTER ===============-->
     <footer class="footer">
-        <div class="footer__container container">
-            <h1 class="footer__title">Haidi Iliass</h1>
+        <div class="container">
+            <div class="footer__container">
+                <div class="footer__content">
+                    <h1 class="footer__title">Haidi Iliass</h1>
+                    <p class="footer__description">
+                        Développeur Full-Stack passionné par la création d'expériences numériques innovantes.
+                    </p>
+                </div>
 
-            <ul class="footer__list">
+                <div class="footer__links">
+                    <div class="footer__group">
+                        <h3 class="footer__group-title">Navigation</h3>
+                        <ul class="footer__list">
+                            <li><a href="#home" class="footer__link">Accueil</a></li>
+                            <li><a href="#about" class="footer__link">À propos</a></li>
+                            <li><a href="#skills" class="footer__link">Compétences</a></li>
+                            <li><a href="#projects" class="footer__link">Projets</a></li>
+                            <li><a href="#contact" class="footer__link">Contact</a></li>
+                        </ul>
+                    </div>
 
-                <li class="footer__item">
-                    <a href="#" class="footer__link">Home</a>
-                </li>
-                <li class="footer__item">
-                    <a href="#about" class="footer__link">About</a>
-                </li>
-                <li class="footer__item">
-                    <a href="#skills" class="footer__link">Skills</a>
-                </li>
-                <li class="footer__item">
-                    <a href="#work" class="footer__link">Work</a>
-                </li>
-                <li class="footer__item">
-                    <a href="#contact" class="footer__link">Contact</a>
-                </li>
-            </ul>
+                    <div class="footer__group">
+                        <h3 class="footer__group-title">Réseaux sociaux</h3>
+                        <div class="footer__social">
+                            <a href="https://www.linkedin.com/in/haidi-iliass-37381833a" target="_blank" class="footer__social-link">
+                                <i class='bx bxl-linkedin'></i>
+                            </a>
+                            <a href="https://github.com/iliass7777" target="_blank" class="footer__social-link">
+                                <i class='bx bxl-github'></i>
+                            </a>
+                            <a href="https://instagram.com/iliass.hd" target="_blank" class="footer__social-link">
+                                <i class='bx bxl-instagram'></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-            <ul class="footer__social">
-                <li class="footer__social-item">
-                    <a href="" target="_blank" class="footer__social-link">
-                        <i class='bx bxl-linkedin footer__social-icon'></i>
-                    </a>
-                </li>
-                <li class="footer__social-item">
-                    <a href="" target="_blank" class="footer__social-link">
-                        <i class='bx bxl-instagram footer__social-icon'></i>
-                    </a>
-                </li>
-            </ul>
-
-            <span class="footer__copy">
-                &#169; 2025 Haidi Iliass. All right reserved
-            </span>
+            <div class="footer__copy">
+                <p>&copy; 2025 Haidi Iliass. Tous droits réservés.</p>
+            </div>
         </div>
     </footer>
 
-    <!--=============== SCROLLREVEAL ===============-->
-
-    <!-- <script src="assets/js/scrollreveal.min.js"></script> -->
-    <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
-
-    <!--=============== SWIPER JS ===============-->
-    <script src="assets/js/swiper-bundle.min.js"></script>
-
-    <!--=============== MIXITUP FILTER ===============-->
-    <script src="assets/js/mixitup.min.js"></script>
-
     <!--=============== MAIN JS ===============-->
     <script src="assets/js/main.js"></script>
-    <script>
-        // Initialiser EmailJS avec ton User ID
-        (function() {
-          emailjs.init("ws5C0bbs06CbwA1_N"); // Remplace "ton_user_id" par ton User ID EmailJS
-        })();
-      
-        // Ajouter un événement submit au formulaire
-        document.getElementById('contact-form').addEventListener('submit', function(event) {
-          event.preventDefault(); // Empêche le rechargement de la page
-      
-          // Récupérer les données du formulaire
-          const formData = new FormData(this);
-      
-          // Envoyer le formulaire via EmailJS
-          emailjs.sendForm('service_we20q3w', 'template_mmumd83', this)
-            .then(function(response) {
-              console.log('SUCCESS!', response);
-              alert('Message envoyé avec succès!');
-            }, function(error) {
-              console.log('FAILED...', error);
-              alert('Échec de l\'envoi du message.');
-            });
-        });
-      </script>
-      
 </body>
 
 </html>
