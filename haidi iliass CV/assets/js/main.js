@@ -245,57 +245,69 @@ function initAnimations() {
     }, '-=0.5');
 
     // Parallax effect for floating elements
-    gsap.to('.floating-element', {
-        y: -20,
-        duration: 2,
-        ease: 'power1.inOut',
-        stagger: 0.2,
-        repeat: -1,
-        yoyo: true
-    });
+    const floatingElements = document.querySelectorAll('.floating-element');
+    if (floatingElements.length > 0) {
+        gsap.to(Array.from(floatingElements), {
+            y: -20,
+            duration: 2,
+            ease: 'power1.inOut',
+            stagger: 0.2,
+            repeat: -1,
+            yoyo: true
+        });
+    }
 
     // About section animations with ScrollTrigger
-    gsap.from('.about__img-wrapper', {
-        scrollTrigger: {
-            trigger: '.about__img-wrapper',
-            start: 'top 80%',
-            end: 'bottom 20%',
-            toggleActions: 'play none none reverse'
-        },
-        opacity: 0,
-        x: -50,
-        duration: 1,
-        ease: 'power2.out'
-    });
+    const aboutImgWrapper = document.querySelector('.about__img-wrapper');
+    if (aboutImgWrapper) {
+        gsap.from(aboutImgWrapper, {
+            scrollTrigger: {
+                trigger: aboutImgWrapper,
+                start: 'top 80%',
+                end: 'bottom 20%',
+                toggleActions: 'play none none reverse'
+            },
+            opacity: 0,
+            x: -50,
+            duration: 1,
+            ease: 'power2.out'
+        });
+    }
 
-    gsap.from('.about__text', {
-        scrollTrigger: {
-            trigger: '.about__text',
-            start: 'top 80%',
-            end: 'bottom 20%',
-            toggleActions: 'play none none reverse'
-        },
-        opacity: 0,
-        x: 50,
-        duration: 1,
-        ease: 'power2.out'
-    });
+    const aboutText = document.querySelector('.about__text');
+    if (aboutText) {
+        gsap.from(aboutText, {
+            scrollTrigger: {
+                trigger: aboutText,
+                start: 'top 80%',
+                end: 'bottom 20%',
+                toggleActions: 'play none none reverse'
+            },
+            opacity: 0,
+            x: 50,
+            duration: 1,
+            ease: 'power2.out'
+        });
+    }
 
     // Animate stats with counter effect
-    gsap.from('.stat-item', {
-        scrollTrigger: {
-            trigger: '.about__stats',
-            start: 'top 80%',
-            end: 'bottom 20%',
-            toggleActions: 'play none none reverse'
-        },
-        opacity: 0,
-        y: 30,
-        duration: 0.8,
-        stagger: 0.2,
-        ease: 'power2.out',
-        onComplete: animateCounters
-    });
+    const statItems = document.querySelectorAll('.stat-item');
+    if (statItems.length > 0) {
+        gsap.from(Array.from(statItems), {
+            scrollTrigger: {
+                trigger: '.about__stats',
+                start: 'top 80%',
+                end: 'bottom 20%',
+                toggleActions: 'play none none reverse'
+            },
+            opacity: 0,
+            y: 30,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: 'power2.out',
+            onComplete: animateCounters
+        });
+    }
 
     // Background grid animation
     gsap.to('.bg-grid', {
@@ -306,19 +318,22 @@ function initAnimations() {
     });
 
     // Skills section animations
-    gsap.from('.skills__content', {
-        scrollTrigger: {
-            trigger: '.skills',
-            start: 'top 80%',
-            end: 'bottom 20%',
-            toggleActions: 'play none none reverse'
-        },
-        opacity: 0,
-        y: 50,
-        duration: 1,
-        stagger: 0.3,
-        ease: 'power2.out'
-    });
+    const skillsContent = document.querySelectorAll('.skills__content');
+    if (skillsContent.length > 0) {
+        gsap.from(Array.from(skillsContent), {
+            scrollTrigger: {
+                trigger: '.skills',
+                start: 'top 80%',
+                end: 'bottom 20%',
+                toggleActions: 'play none none reverse'
+            },
+            opacity: 0,
+            y: 50,
+            duration: 1,
+            stagger: 0.3,
+            ease: 'power2.out'
+        });
+    }
 
     // Animate skill progress bars
     gsap.utils.toArray('.skills__progress-bar').forEach(bar => {
@@ -338,19 +353,22 @@ function initAnimations() {
     });
 
     // Simple Project Cards Animations
-    gsap.from('.project-card', {
-        scrollTrigger: {
-            trigger: '.projects__grid',
-            start: 'top 80%',
-            end: 'bottom 20%',
-            toggleActions: 'play none none reverse'
-        },
-        opacity: 0,
-        y: 30,
-        duration: 0.6,
-        stagger: 0.1,
-        ease: 'power2.out'
-    });
+    const projectCards = document.querySelectorAll('.project-card');
+    if (projectCards.length > 0) {
+        gsap.from(Array.from(projectCards), {
+            scrollTrigger: {
+                trigger: '.projects__grid',
+                start: 'top 80%',
+                end: 'bottom 20%',
+                toggleActions: 'play none none reverse'
+            },
+            opacity: 0,
+            y: 30,
+            duration: 0.6,
+            stagger: 0.1,
+            ease: 'power2.out'
+        });
+    }
 
     // Animate progress bars when visible
     gsap.utils.toArray('.progress-fill').forEach(bar => {
@@ -370,19 +388,22 @@ function initAnimations() {
     });
 
     // Contact section animations
-    gsap.from('.contact__card', {
-        scrollTrigger: {
-            trigger: '.contact__cards',
-            start: 'top 80%',
-            end: 'bottom 20%',
-            toggleActions: 'play none none reverse'
-        },
-        opacity: 0,
-        y: 30,
-        duration: 0.8,
-        stagger: 0.2,
-        ease: 'power2.out'
-    });
+    const contactCards = document.querySelectorAll('.contact__card');
+    if (contactCards.length > 0) {
+        gsap.from(Array.from(contactCards), {
+            scrollTrigger: {
+                trigger: '.contact__cards',
+                start: 'top 80%',
+                end: 'bottom 20%',
+                toggleActions: 'play none none reverse'
+            },
+            opacity: 0,
+            y: 30,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: 'power2.out'
+        });
+    }
 
     gsap.from('.contact__form-container', {
         scrollTrigger: {
@@ -398,34 +419,43 @@ function initAnimations() {
     });
 
     // Footer animations
-    gsap.from('.footer__content, .footer__links', {
-        scrollTrigger: {
-            trigger: '.footer',
-            start: 'top 80%',
-            end: 'bottom 20%',
-            toggleActions: 'play none none reverse'
-        },
-        opacity: 0,
-        y: 30,
-        duration: 0.8,
-        stagger: 0.3,
-        ease: 'power2.out'
-    });
+    const footerElements = document.querySelectorAll('.footer__content, .footer__links');
+    if (footerElements.length > 0) {
+        gsap.from(Array.from(footerElements), {
+            scrollTrigger: {
+                trigger: '.footer',
+                start: 'top 80%',
+                end: 'bottom 20%',
+                toggleActions: 'play none none reverse'
+            },
+            opacity: 0,
+            y: 30,
+            duration: 0.8,
+            stagger: 0.3,
+            ease: 'power2.out'
+        });
+    }
 
     // Chatbot entrance animation
-    gsap.from('.chatbot__toggle', {
-        scale: 0,
-        rotation: 180,
-        duration: 0.8,
-        ease: 'back.out(1.7)',
-        delay: 2
-    });
+    const chatbotToggle = document.querySelector('.chatbot__toggle');
+    if (chatbotToggle) {
+        gsap.from(chatbotToggle, {
+            scale: 0,
+            rotation: 180,
+            duration: 0.8,
+            ease: 'back.out(1.7)',
+            delay: 2
+        });
+    }
 
     // Animate chatbot notification
-    gsap.set('.chatbot__notification', {
-        scale: 0.8,
-        opacity: 0
-    });
+    const chatbotNotification = document.querySelector('.chatbot__notification');
+    if (chatbotNotification) {
+        gsap.set(chatbotNotification, {
+            scale: 0.8,
+            opacity: 0
+        });
+    }
 }
 
 /*=============== COUNTER ANIMATION ===============*/
@@ -472,19 +502,22 @@ smoothScrollLinks.forEach(link => {
 
 /*=============== SCROLL REVEAL ANIMATIONS ===============*/
 gsap.utils.toArray('.section').forEach(section => {
-    gsap.from(section.querySelectorAll('.section__subtitle, .section__title'), {
-        scrollTrigger: {
-            trigger: section,
-            start: 'top 80%',
-            end: 'bottom 20%',
-            toggleActions: 'play none none reverse'
-        },
-        opacity: 0,
-        y: 30,
-        duration: 0.8,
-        stagger: 0.2,
-        ease: 'power2.out'
-    });
+    const elements = Array.from(section.querySelectorAll('.section__subtitle, .section__title'));
+    if (elements.length > 0) {
+        gsap.from(elements, {
+            scrollTrigger: {
+                trigger: section,
+                start: 'top 80%',
+                end: 'bottom 20%',
+                toggleActions: 'play none none reverse'
+            },
+            opacity: 0,
+            y: 30,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: 'power2.out'
+        });
+    }
 });
 
 /*=============== AI CHATBOT ===============*/
@@ -949,13 +982,11 @@ function toggleChatbot() {
 
 // Initialize chatbot simplifié
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('🤖 Initialisation du chatbot simplifié...');
 
     const chatbotBtn = document.getElementById('chatbot-btn');
     const chatbotNotification = document.getElementById('chatbot-notification');
 
     if (chatbotBtn) {
-        console.log('✅ Bouton chatbot trouvé !');
 
         // Animation d'entrée simple (après le chargement)
         gsap.from(chatbotBtn, {
@@ -977,17 +1008,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }, 6000); // 4s de chargement + 2s d'attente
 
-        console.log('✅ Chatbot simplifié initialisé avec succès !');
     } else {
-        console.error('❌ Bouton chatbot non trouvé !');
     }
 });
 
 /*=============== EMAILJS CONTACT FORM ===============*/
-// Initialize EmailJS
-(function() {
-    emailjs.init("ws5C0bbs06CbwA1_N");
-})();
+// Initialize EmailJS v4
+emailjs.init("ws5C0bbs06CbwA1_N");
 
 // Contact form handler
 const contactForm = document.getElementById('contact-form');
@@ -995,18 +1022,21 @@ if (contactForm) {
     contactForm.addEventListener('submit', function(event) {
         event.preventDefault();
 
-        emailjs.sendForm('service_we20q3w', 'template_mmumd83', this)
+        emailjs.sendForm('service_we20q3w', 'template_mmumd83', this, "ws5C0bbs06CbwA1_N")
             .then(function(response) {
-                console.log('SUCCESS!', response);
+                console.log('SUCCESS!', response.status, response.text);
 
                 // Show success animation
-                gsap.to('.contact__form', {
-                    scale: 0.95,
-                    duration: 0.1,
-                    yoyo: true,
-                    repeat: 1,
-                    ease: 'power2.inOut'
-                });
+                const contactFormElement = document.querySelector('.contact__form');
+                if (contactFormElement) {
+                    gsap.to(contactFormElement, {
+                        scale: 0.95,
+                        duration: 0.1,
+                        yoyo: true,
+                        repeat: 1,
+                        ease: 'power2.inOut'
+                    });
+                }
 
                 alert('Message envoyé avec succès!');
                 contactForm.reset();
